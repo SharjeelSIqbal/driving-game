@@ -15,3 +15,23 @@ img {
 .race-car {
   position: absolute;
 }
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.rotate-down {
+  transform: rotate(90deg);
+}
+
+.rotate-up {
+  transform: rotate(-90deg);
+}
+
+.race-car,
+.rotate-180,
+.rotate-down,
+.rotate-up,
+.transition {
+  transition: 0.25s;
+}
