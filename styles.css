@@ -1,0 +1,15 @@
+body {
+  background-color: green;
+}
+
+img {
+  width: 150px;
+}
+
+.container {
+  position: relative;
+}
+
+.race-car {
+  position: absolute;
+}
