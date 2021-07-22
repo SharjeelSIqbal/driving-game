@@ -2,12 +2,14 @@ var carStarting;
 var $raceCar = document.querySelector('.race-car');
 var currentCarPlace = {
   x: $raceCar.x,
-  y: $raceCar.y
+  y: $raceCar.y,
+  start: false
 };
 
 function rotate(event) {
+
   if (event.key === 'w') {
-    $raceCar.className = 'race-car rotate-up';
+    $raceCar.className = 'race-car rotat e-up';
   }
   if (event.key === 's') {
     $raceCar.className = 'race-car rotate-down';
@@ -19,15 +21,31 @@ function rotate(event) {
     $raceCar.className = 'race-car rotate-180';
   }
   if (event.key === ' ') {
-    carStarting = setInterval(carStart, 16);
+    onSwitch();
+    if (currentCarPlace.start === true) {
+      carStarting = setInterval(carStart, 16);
+    } else {
+      clearInterval(carStarting);
+    }
+
   }
 }
+
 document.addEventListener('keydown', rotate);
 
 function carStart() {
-  if (currentCarPlace.x > 1080) {
+
+  if (currentCarPlace.x > 4000) {
     clearInterval(carStarting);
   }
-  currentCarPlace.x += 13;
+  currentCarPlace.x += 8;
   $raceCar.style.transform = 'translateX(' + currentCarPlace.x + 'px)';
+}
+
+function onSwitch() {
+  if (currentCarPlace.start === false) {
+    currentCarPlace.start = true;
+  } else {
+    currentCarPlace.start = false;
+  }
 }
