@@ -1,6 +1,6 @@
 var carStarting;
 var $raceCar = document.querySelector('.race-car');
-var currentCarPlace = {
+var carStatus = {
   x: $raceCar.x,
   y: $raceCar.y,
   start: false
@@ -9,20 +9,25 @@ var currentCarPlace = {
 function rotate(event) {
 
   if (event.key === 'w') {
-    $raceCar.className = 'race-car rotat e-up';
+    $raceCar.style.transform = 'translateY(' + carStatus.y + 'px) translateX(' + carStatus.x + 'px)rotate(-90deg)';
+    carStatus.y -= 45;
   }
   if (event.key === 's') {
-    $raceCar.className = 'race-car rotate-down';
+    $raceCar.style.transform = 'translateY(' + carStatus.y + 'px) translateX(' + carStatus.x + 'px) rotate(90deg)';
+
+    carStatus.y += 45;
   }
   if (event.key === 'd') {
-    $raceCar.className = 'race-car';
+    $raceCar.style.transform = 'translateX(' + carStatus.x + 'px) translateY(' + carStatus.y + 'px)';
+    carStatus.x += 45;
   }
   if (event.key === 'a') {
-    $raceCar.className = 'race-car rotate-180';
+    $raceCar.style.transform = 'translateX(' + carStatus.x + 'px) translateY(' + carStatus.y + 'px) rotate(180deg)';
+    carStatus.x -= 45;
   }
   if (event.key === ' ') {
     onSwitch();
-    if (currentCarPlace.start === true) {
+    if (carStatus.start === true) {
       carStarting = setInterval(carStart, 16);
     } else {
       clearInterval(carStarting);
@@ -34,18 +39,17 @@ function rotate(event) {
 document.addEventListener('keydown', rotate);
 
 function carStart() {
-
-  if (currentCarPlace.x > 4000) {
+  if (carStatus.x > 2500) {
     clearInterval(carStarting);
   }
-  currentCarPlace.x += 8;
-  $raceCar.style.transform = 'translateX(' + currentCarPlace.x + 'px)';
+  carStatus.x += 8;
+  $raceCar.style.transform = 'translateX(' + carStatus.x + 'px) translateY(' + carStatus.y + 'px)s';
 }
 
 function onSwitch() {
-  if (currentCarPlace.start === false) {
-    currentCarPlace.start = true;
+  if (carStatus.start === false) {
+    carStatus.start = true;
   } else {
-    currentCarPlace.start = false;
+    carStatus.start = false;
   }
 }
